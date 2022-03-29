@@ -9,14 +9,7 @@ checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [
 sh 'ls'
   }
   }
-  stage('build'){
-  steps{
-    sh 'echo "Building the pipeline " '
-    dir("/var/lib/jenkins/workspace/sonarqube1/") {
-    sh 'mvn clean package'
-    }
-  }
-}
+ 
 stage ('Scan and Build Jar File') {
             steps {
                withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonarqube-token') {
