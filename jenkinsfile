@@ -5,8 +5,12 @@ pipeline {
     maven Maven3;
     }
   stages {
-  stage('Clone the Git') {
-    git 'https://github.com/pavaniprabha/sonarqube1.git'
+  stage("Ravina"){
+steps {
+sh 'echo "Checking code" '
+checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/pavaniprabha/sonarqube1.git']]])
+sh 'ls'
+  }
   }
   stage('build'){
   steps{
