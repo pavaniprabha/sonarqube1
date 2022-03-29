@@ -1,0 +1,25 @@
+pipeline {
+  agent any
+  
+  tools {
+    maven Maven3;
+    }
+  stages {
+  stage('Clone the Git') {
+    git 'https://github.com/pavaniprabha/sonarqube1.git'
+  }
+  stage('build'){
+  steps{
+    sh 'echo "Building the pipeline " '
+    dir("/var/lib/jenkins/workspace/sonarqube1/") {
+    sh 'mvn clean package'
+    }
+  }
+}
+stage ('Scan and Build Jar File') {
+            steps {
+               withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonarqube-token') {
+                sh 'mvn clean package sonar:sonar'
+                }
+            }
+        }
