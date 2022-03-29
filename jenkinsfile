@@ -13,7 +13,7 @@ sh 'ls'
 stage ('Scan and Build Jar File') {
             steps {
                withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonarqube-token') {
-                sh 'mvn clean package '
+                sh 'mvn clean package sonar:sonar'
                 }
             }
         }
